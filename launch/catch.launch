@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--LAUNCH A NODE TO PUBLISH AN STATIC TRANSFORMATION BETWEEN /map and /WORLD WITH A FREQ 100-->
+  <node pkg="tf" type="static_transform_publisher" name="static_transformation" args="0 0 0 0 0 0 1 world map 10" />
+  <node pkg="tf" type="static_transform_publisher" name="marker_static_tf" args="0 0 0 0 0 0 1 world pos_marker_frame 10" />
+
+  <!--LAUNCH RVIZ NODE -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find catch_it_package)/launch/rviz/catch.rviz"/>
+
+
+  <!--LAUNCH VISUALIZATION MARKER NODE-->
+  <node name="target_visualization_node" pkg="catch_it_package" type="target_vis"/>
+
+  <node name="target_pos_node" pkg="catch_it_package" type="dummy_target_pose_pub"/>
+    
+  <!--LAUNCH POSITION PREDICTION NODE-->
+  <node name="prediction_node" pkg="catch_it_package" type="pos_predict" output="screen"/>
+ 
+ 
+</launch>
